@@ -23,7 +23,7 @@ simple_rnn_project/
 
 ### 1. Install dependencies
 
-```bash
+```
 pip3 install -r requirements.txt
 ```
 
