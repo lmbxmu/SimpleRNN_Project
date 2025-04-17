@@ -27,5 +27,11 @@ simple_rnn_project/
 pip3 install -r requirements.txt
 ```
 
+### 2. Train the model
+
+```
+bash train.sh
+```
+
 
 ### It is still under development.
