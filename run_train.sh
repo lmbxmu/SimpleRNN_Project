@@ -1,4 +1,5 @@
-# Train the model
+#!/bin/bash
+# Example training script
 
 python3 run_train.py \
    --text "Hello world! This is a test to verify the correctness of dataloader." \
