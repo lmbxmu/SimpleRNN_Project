@@ -1,4 +1,4 @@
-# SimpleRNN Language Model
+# 1. SimpleRNN Language Model
 
 This projects implements a custom recurrent neural network (`SimpleRNN`) and a language modeling framework using PyTorch. It includes training and inference scripts, dataset loading, and basic token generation.
 
@@ -74,3 +74,25 @@ python3 run_infer.py --prompt "The sky is" --max_length 20 --device cpu
 
 
 ### It is still under development.
+
+
+---
+---
+# 2. Self-Attention vs. SimpleRNN
+
+Aspect | Self-Attention | SimpleRNN
+|---|---------|-------|
+|Parallelism | Full Parallel over time | Sequential over time|
+|Long-Range Dependancy | Captures well via global token-token interactions | Degrades with distance (vanishing influence) |
+|Memory | Quadratic in sequence length | Linear in time |
+|Interpretability | Attention weights are interpretable | Hard to trace intermediate steps|
+|Computation Cost | High due to dot-product and softmax | Low due to local updates|
+|Scalability | More scalable with GPUs | Challenging due to time dependency|
+
+
+
+-----
+-----
+
+# 3. Scaling SimpleRNN training
+
