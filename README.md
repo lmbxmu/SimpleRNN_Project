@@ -87,7 +87,7 @@ Aspect | Self-Attention | SimpleRNN
 |Memory | Quadratic in sequence length | Linear in time |
 |Interpretability | Attention weights are interpretable | Hard to trace intermediate steps|
 |Computation Cost | High due to dot-product and softmax | Low due to local updates|
-|Scalability | More scalable with GPUs | Challenging ue to time dependency|
+|Scalability | More scalable with GPUs | Challenging due to time dependency|
 
 
 
