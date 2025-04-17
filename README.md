@@ -78,7 +78,7 @@ python3 run_infer.py --prompt "The sky is" --max_length 20 --device cpu
 
 ---
 ---
-# 2. Self-Attention vs. SimpleRNN
+# 2. Self-Attention *vs*. SimpleRNN
 
 Aspect | Self-Attention | SimpleRNN
 |---|---------|-------|
@@ -96,3 +96,28 @@ Aspect | Self-Attention | SimpleRNN
 
 # 3. Scaling SimpleRNN training
 
+I am not an expert on RNNs. Honestly speaking, below information is summarized from multiple sources I have searched from the intenet.
+
+## A. Sequence Truncation / Sliding Windows
+- **Pros**: Reduces time dependency length, fits longer sequences into memory.
+- **Cons**: Might lose long-term information.
+
+## B. Layer-wise Parallelism
+- **Pros**: Can run different layers in parallel (pipeline style).
+- **Cons**: Latency bottleneck due to time steps still being sequential.
+
+## C. Use of JIT and Fusion Kernels
+- **Pros**: Speed-up via low-level CUDA or TorchScript optimizations.
+- **Cons**: Complex to implement; limited to static graphs.
+
+## D. Mixed Precision Training
+- **Pros**: Faster training, less memory use.
+- **Cons**: Might introduce numerical instability in recurrent loops.
+
+## E. Truncated Backpropagation Through Time (TBPTT)
+- **Pros**: Lower memory footprint.
+- **Cons**: Incomplete gradients for long sequences.
+
+## F. State Caching for Inference
+- **Pros**: Avoid recomputation; essential in autoregressive generation.
+- **Cons**: Might be stale if context changes significantly.
