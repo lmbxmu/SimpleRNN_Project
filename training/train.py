@@ -14,7 +14,7 @@ import torch.optim as optim
 from tqdm import tqdm
 
 
-def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = False)
+def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = False):
     model.to(device)
     optimizer = optim.Adam(model.parameters(), lr = lr)
     scaler = torch.cuda.amp.GradScaler(enabled = use_amp)
