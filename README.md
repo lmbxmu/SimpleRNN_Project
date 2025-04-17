@@ -29,9 +29,48 @@ pip3 install -r requirements.txt
 
 ### 2. Train the model
 
-```
+```bash
 bash train.sh
 ```
+
+or directly:
+```bash
+python3 run_train.py \
+   --text "Hello world! This is a test to verify the correctness of dataloader." \
+   --seq_len 8 \
+   --batch_size 4 \
+   --num_epochs 5 \
+   --lr 0.001 \
+   --device gpu
+```
+
+---
+
+
+### 2. Run inference
+
+```bash
+bash infer.sh
+```
+
+or directly:
+
+```bash
+python3 run_infer.py --prompt "The sky is" --max_length 20 --device cpu
+```
+
+---
+
+## References
+
+- [PyTorch RNN Layers](https://pytorch.org/docs/stable/nn.html#recurrent-layers)  
+- [HuggingFace Transformers](https://github.com/huggingface/transformers)
+
+---
+
+
+## Author
+- Mingbao Lin
 
 
 ### It is still under development.
