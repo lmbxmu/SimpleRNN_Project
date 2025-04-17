@@ -35,8 +35,21 @@ def collate_batch(batch):
 
 if __name__ == "__main__":
     from transformers import AutoTokenizer
+    from torch.utils.data import DataLoader
+
+
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
     dataset = CharDataset("Hello world! This is a test to verify the correctness of dataloader.", tokenizer, seq_len = 8)
     for i in range(3):
         input_seq, target_seq = dataset[i]
         print(f"Input: {input_seq}, Target: {target_seq}")
+
+    
+    dataloader = DataLoader(dataset, batch_size = 2, collate_fn = collate_batch)
+    for batch in dataloader:
+        input_batch, target_batch = batch
+        print("Input batch shape:", input_batch.shape)
+        print("Target batch shape:", target_batch.shape)
+        print("Input batch:", input_batch)
+        print("Target batch:", target_batch)
+        break
