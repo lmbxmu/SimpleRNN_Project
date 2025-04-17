@@ -1,3 +1,16 @@
+'''
+Character-level dataset for autoregressive language modeling.
+Prepares input-target token pairs for next-token prediction
+
+
+Author: Mingbao Lin
+Acknowledgement: Inpsired by tokenization and batching routines in HuggingFace and PyTorch NLP examples.
+References:
+-- https://pytorch.org/tutorials/beginner/transformer_tutorial.html
+-- https://github.com/huggingface/transformers/blob/main/src/transformers/data/data_collator.py
+'''
+
+
 from torch.utils.data import Dataset
 import torch
 
