@@ -11,8 +11,23 @@ from inference.encode import greedy_decode
 from transformers import AutoTokenizer
 import torch
 
+import argparse
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Run inference with SimpleRNN-based LM")
+    parser.add_argument("--prompt", type=str, required=True, help="Prompt text")
+    parser.add_argument("--max_length", type=int, default=20, help="Maximum number of tokens to generate")
+    parser.add_argument("--device", type=str, default="cuda", help="Device to run inference on")
+    args = parser.parse_args()
+
+    tokenizer = AutoTokenizer.from_pretrained("gpt2")
+    model = LM(vocab_size = tokenizer.vocab_size, hidden_dim = 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
+    model.to(args.device)
+
+    result = greedy_decode(model, tokenizer, args.prompt, max_length = args.max_length, device = args.device)
+    print("Generated text:", result)
+
 
 if __name__ == "__main__":
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    model = LM(tokenizer.vocab_size, hidden_dim= 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
-    print(greedy_decode(model, tokenizer, "The sky is", max_length = 20))
+    main()
