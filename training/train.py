@@ -38,13 +38,15 @@ def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = Fa
 
 
 if __name__ == "__main__":
-    from ..models.simple_rnn import LM
-    from ..data.dataset import CharDataset, collate_batch
+    import sys
+    sys.path.append("..")
+    from models.simple_rnn import LM
+    from data.dataset import CharDataset, collate_batch
     from transformers import AutoTokenizer
     from torch.utils.data import DataLoader
 
     tokenizer = AutoTokenizer.from_pretrained("gpt2") 
     dataset = CharDataset("Hello world! This is a test to verify the correctness of dataloader.", tokenizer, seq_len = 8)
     dataloader = DataLoader(dataset, batch_size = 4, shuffle = True, collate_fn = collate_batch)
-    model = LM(tokenizer.vocab_size, hidden_dim= 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
+    model = LM(tokenizer.vocab_size, hidden_dim= 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
     train_model(model, dataloader, num_epochs = 1, lr = 1e-3, device = "cpu")
