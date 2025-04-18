@@ -7,7 +7,7 @@ References:
 '''
 
 from models.simple_rnn import LM
-from inference.encode import greedy_decode
+from inference.decode import greedy_decode
 from transformers import AutoTokenizer
 import torch
 
@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
 
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    model = LM(vocab_size = tokenizer.vocab_size, hidden_dim = 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
+    model = LM(vocab_size = tokenizer.vocab_size, hidden_dim = 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
     model.to(args.device)
 
     result = greedy_decode(model, tokenizer, args.prompt, max_length = args.max_length, device = args.device)
