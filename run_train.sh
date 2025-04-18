@@ -7,4 +7,4 @@ python3 run_train.py \
    --batch_size 4 \
    --num_epochs 5 \
    --lr 0.001 \
-   --device gpu
+   --device "cuda"

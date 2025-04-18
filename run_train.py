@@ -29,7 +29,7 @@ def main():
     dataset = CharDataset(args.text, tokenizer, seq_len = args.seq_len)
     dataloader = DataLoader(dataset, batch_size = args.batch_size, shuffle = True, collate_fn = collate_batch)
 
-    model = LM(vocab_size = tokenizer.vocab_size, hidden_dim = 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
+    model = LM(vocab_size = tokenizer.vocab_size, hidden_dim = 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
     train_model(model, dataloader, num_epochs = args.num_epochs, lr = args.lr, device = args.device)
 
 
