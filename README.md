@@ -32,15 +32,21 @@ pip3 install -r requirements.txt
 ```bash
 bash train.sh
 ```
+You will see:
+
+![training log](./assets/train.png)
 
 ---
 
 
-### 2. Run inference
+### 3. Run inference
 
 ```bash
 bash infer.sh
 ```
+You will see:
+
+![training log](./assets/test.png)
 
 ---
 
