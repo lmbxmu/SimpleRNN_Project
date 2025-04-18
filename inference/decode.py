@@ -20,8 +20,10 @@ def greedy_decode(model, tokenizer, prompt: str, max_length: int = 50, device = 
 
 
 if __name__ == "__main__":
-    from ..models.simple_rnn import LM
+    import sys
+    sys.path.append("..")
+    from models.simple_rnn import LM
     from transformers import AutoTokenizer
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    model = LM(tokenizer.vocab_size, hidden_dim= 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
-    print(greedy_decode(model, tokenizer, "hello", max_length = 0, device = "cpu"))
+    model = LM(tokenizer.vocab_size, hidden_dim= 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
+    print(greedy_decode(model, tokenizer, "hello, world!", max_length = 10, device = "cpu"))
