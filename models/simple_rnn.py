@@ -92,7 +92,7 @@ class LM(nn.Module):
 
 
 if __name__ == "__main__":
-    model = LM(vocab_size= 1000, hidden_dim= 128, key_dim = 32, value_dim = 32, output_dim = 64, num_layers = 2)
+    model = LM(vocab_size= 1000, hidden_dim= 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
     input_ids = torch.randint(0, 1000, (2, 10))
     output = model(input_ids)
     print("Model output shape:", output.shape)
