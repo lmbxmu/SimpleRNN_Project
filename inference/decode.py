@@ -16,6 +16,8 @@ def greedy_decode(model, tokenizer, prompt: str, max_length: int = 50, device = 
             logits = model(input_ids)
             next_token = logits[:, -1, :].argmax(dim = -1, keepdim = True)
             input_ids = torch.cat([input_ids, next_token], dim = 1)
+            if next_token.item() == tokenizer.eos_token_id:
+                break
     return tokenizer.decode(input_ids[0], skip_special_tokens = True)
 
 
