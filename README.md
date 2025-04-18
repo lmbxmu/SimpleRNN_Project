@@ -2,7 +2,6 @@
 
 This projects implements a custom recurrent neural network (`SimpleRNN`) and a language modeling framework using PyTorch. It includes training and inference scripts, dataset loading, and basic token generation.
 
----
 
 ## Project Structure
 
@@ -36,7 +35,6 @@ You will see:
 
 ![training log](./assets/train.png)
 
----
 
 
 ### 3. Run inference
@@ -48,25 +46,13 @@ You will see:
 
 ![training log](./assets/test.png)
 
----
 
 ## References
 
 - [PyTorch RNN Layers](https://pytorch.org/docs/stable/nn.html#recurrent-layers)  
 - [HuggingFace Transformers](https://github.com/huggingface/transformers)
 
----
 
-
-## Author
-- Mingbao Lin
-
-
-### It is still under development.
-
-
----
----
 # 2. Self-Attention *vs*. SimpleRNN
 
 Aspect | Self-Attention | SimpleRNN
@@ -80,8 +66,6 @@ Aspect | Self-Attention | SimpleRNN
 
 
 
------
------
 
 # 3. Scaling SimpleRNN training
 
