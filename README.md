@@ -85,7 +85,7 @@ Aspect | Self-Attention | SimpleRNN
 
 # 3. Scaling SimpleRNN training
 
-I am not an expert on RNNs. Honestly speaking, below information is summarized from multiple sources I have searched from the intenet.
+I am not an expert on RNNs. Honestly speaking, below information is summarized from multiple sources I have searched from the Intenet.
 
 ## A. Sequence Truncation / Sliding Windows
 - **Pros**: Reduces time dependency length, fits longer sequences into memory.
