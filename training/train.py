@@ -17,7 +17,7 @@ from tqdm import tqdm
 def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = False):
     model.to(device)
     optimizer = optim.Adam(model.parameters(), lr = lr)
-    scaler = torch.cuda.amp.GradScaler(enabled = use_amp)
+    scaler = torch.amp.GradScaler("cuda", enabled = use_amp)
     loss_fn = nn.CrossEntropyLoss()
 
     model.train()
@@ -26,7 +26,7 @@ def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = Fa
         for input_ids, labels in tqdm(dataloader, desc = f"Epoch {epoch + 1}"):
             input_ids, labels = input_ids.to(device), labels.to(device)
             optimizer.zero_grad()
-            with torch.cuda.amp.autocast(enabled = use_amp):
+            with torch.amp.autocast("cuda", enabled = use_amp):
                 logits = model(input_ids)
                 loss = loss_fn(logits.view(-1, logits.size(-1)), labels.view(-1))
             scaler.scale(loss).backward()
