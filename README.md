@@ -82,7 +82,7 @@ python3 run_infer.py --prompt "The sky is" --max_length 20 --device cpu
 
 Aspect | Self-Attention | SimpleRNN
 |---|---------|-------|
-|Parallelism | Full Parallel over time | Sequential over time (see [code](https://github.com/lmbxmu/SimpleRNN_Project/blob/d737a9380954a77861106be51dcce2ede7aad115/models/simple_rnn.py#L42)|
+|Parallelism | Full Parallel over time | Sequential over time (see [code](https://github.com/lmbxmu/SimpleRNN_Project/blob/d737a9380954a77861106be51dcce2ede7aad115/models/simple_rnn.py#L42))|
 |Long-Range Dependancy | Captures well via global token-token interactions | Degrades with distance (vanishing influence) |
 |Memory | Quadratic in sequence length | Linear in time |
 |Interpretability | Attention weights are interpretable | Hard to trace intermediate steps|
