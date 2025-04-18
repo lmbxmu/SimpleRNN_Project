@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     tokenizer = AutoTokenizer.from_pretrained("gpt2")
     dataset = CharDataset("Hello world! This is a test to verify the correctness of dataloader.", tokenizer, seq_len = 8)
-    for i in range(3):
+    for i in range(4):
         input_seq, target_seq = dataset[i]
         print(f"Input: {input_seq}, Target: {target_seq}")
 
