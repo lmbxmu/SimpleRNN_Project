@@ -87,7 +87,7 @@ I am not an expert on RNNs. Honestly speaking, below information is summarized f
 - **Pros**: Faster training, less memory use.
 - **Cons**: Might introduce numerical instability in recurrent loops.
 
-## E. Truncated Backpropagation Through Time (TBPTT)
+## E. Truncated Backpropagation Through Time (TBPTT)     (see my [research](https://arxiv.org/abs/2406.18173))
 - **Pros**: Lower memory footprint.
 - **Cons**: Incomplete gradients for long sequences.
 
