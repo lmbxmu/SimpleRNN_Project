@@ -79,7 +79,6 @@ class LM(nn.Module):
             output: Tensor of shape (B, T, vocab_size) containing token logits
         """
         B, T = input_ids.shape
-
         hidden_state = self.embedding(input_ids)  # (B, T, hidden_dim)
 
         for layer in self.layers:
