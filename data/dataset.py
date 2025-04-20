@@ -19,7 +19,7 @@ class CharDataset(Dataset):
         for i in range(len(text)):
             text[i] = tokenizer.bos_token + text[i] + tokenizer.eos_token # add BOS and EOS tokens
         self.input_ids = tokenizer(text, return_tensors = "pt", padding = "longest", truncation = True)["input_ids"]
-        self.sequence_lengths = (self.input_ids != tokenizer.pad_token_id).sum(dim = 1)
+        self.sequence_lengths = (self.input_ids != tokenizer.pad_token_id).sum(dim = 1) + 2 # add 2 for BOS and EOS tokens
 
     
     def __len__(self):
