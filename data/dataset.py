@@ -16,23 +16,25 @@ import torch
 
 class CharDataset(Dataset):
     def __init__(self, text: list[str], tokenizer):
-
         for i in range(len(text)):
             text[i] = tokenizer.bos_token + text[i] + tokenizer.eos_token # add BOS and EOS tokens
         self.input_ids = tokenizer(text, return_tensors = "pt", padding = "longest", truncation = True)["input_ids"]
+        self.sequence_lengths = (self.input_ids != tokenizer.pad_token_id).sum(dim = 1)
+
     
     def __len__(self):
         return self.input_ids.shape[0]
     
     def __getitem__(self, idx):
         input_seq = self.input_ids[idx, :]
-        target_seq = self.input_ids[idx, 1:]  # right-shift target sequence by 1 token ==> no bos token in target sequence
-        return input_seq, target_seq
+        target_seq = self.input_ids[idx, :]
+        len_seq = self.sequence_lengths[idx]
+        return input_seq, target_seq, len_seq
 
 
 def collate_batch(batch):
-    inputs, targets = zip(*batch)
-    return torch.stack(inputs), torch.stack(targets)
+    inputs, targets, lens = zip(*batch)
+    return torch.stack(inputs), torch.stack(targets), torch.stack(lens)
 
 
 if __name__ == "__main__":
@@ -47,15 +49,17 @@ if __name__ == "__main__":
 
     dataset = CharDataset(text, tokenizer)
     for i in range(len(text)):
-        input_seq, target_seq = dataset[i]
-        print(f"Input {i}: {input_seq}, Target: {target_seq}")
+        input_seq, target_seq, len_seq = dataset[i]
+        print(f"Input {i}: {input_seq}, Target: {target_seq}, len: {len_seq}")
 
     
     dataloader = DataLoader(dataset, batch_size = 2, collate_fn = collate_batch)
     for batch in dataloader:
-        input_batch, target_batch = batch
+        input_batch, target_batch, len_batch = batch
         print("Input batch shape:", input_batch.shape)
         print("Target batch shape:", target_batch.shape)
+        print("Len batch shape:", len_batch.shape)
         print("Input batch:", input_batch)
         print("Target batch:", target_batch)
+        print("Len batch:", len_batch)
         break
