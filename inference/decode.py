@@ -26,6 +26,6 @@ if __name__ == "__main__":
     sys.path.append("..")
     from models.simple_rnn import LM
     from transformers import AutoTokenizer
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    model = LM(tokenizer.vocab_size, hidden_dim= 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
+    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-tokenizer")
+    model = LM(tokenizer.vocab_size + 1, hidden_dim= 128, key_dim = 128, value_dim = 128, output_dim = 128, num_layers = 2)
     print(greedy_decode(model, tokenizer, "hello, world!", max_length = 10, device = "cpu"))
