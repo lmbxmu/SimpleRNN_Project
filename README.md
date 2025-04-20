@@ -9,6 +9,7 @@ This projects implements a custom recurrent neural network (`SimpleRNN`) and a l
 simple_rnn_project/
 |-- models/                # RNN and LM model definitions
 |-- training/              # Training loop
+|-- test_dataset/          # Test dataset for training
 |-- inference/             # Greedy decoding logic
 |-- data/                  # Dataset and collate function
 |-- run_train.py           # Training entry script (argparse-based)
