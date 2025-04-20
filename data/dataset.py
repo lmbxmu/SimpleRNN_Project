@@ -15,16 +15,18 @@ from torch.utils.data import Dataset
 import torch
 
 class CharDataset(Dataset):
-    def __init__(self, text: str, tokenizer, seq_len: int):
-        self.input_ids = tokenizer(text, return_tensors = "pt")["input_ids"][0]
-        self.seq_len = seq_len
+    def __init__(self, text: list[str], tokenizer):
+
+        for i in range(len(text)):
+            text[i] = tokenizer.bos_token + text[i] + tokenizer.eos_token # add BOS and EOS tokens
+        self.input_ids = tokenizer(text, return_tensors = "pt", padding = "longest", truncation = True)["input_ids"]
     
     def __len__(self):
-        return len(self.input_ids) - self.seq_len
+        return self.input_ids.shape[0]
     
     def __getitem__(self, idx):
-        input_seq = self.input_ids[idx: idx + self.seq_len]
-        target_seq = self.input_ids[idx + 1: idx + 1 + self.seq_len]
+        input_seq = self.input_ids[idx, :]
+        target_seq = self.input_ids[idx, 1:]
         return input_seq, target_seq
 
 
@@ -38,11 +40,15 @@ if __name__ == "__main__":
     from torch.utils.data import DataLoader
 
 
-    tokenizer = AutoTokenizer.from_pretrained("gpt2")
-    dataset = CharDataset("Hello world! This is a test to verify the correctness of dataloader.", tokenizer, seq_len = 8)
-    for i in range(4):
+    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-tokenizer")
+    text = ["Hello world! This is a test to verify the correctness of dataloader.", \
+            "Hellow, this is a test, number 2.", "Hellow", "nice to meet you!",  \
+            "My great honor to meet you!", "How are you doing today?"]
+
+    dataset = CharDataset(text, tokenizer)
+    for i in range(len(text)):
         input_seq, target_seq = dataset[i]
-        print(f"Input: {input_seq}, Target: {target_seq}")
+        print(f"Input {i}: {input_seq}, Target: {target_seq}")
 
     
     dataloader = DataLoader(dataset, batch_size = 2, collate_fn = collate_batch)
