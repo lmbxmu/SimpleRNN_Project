@@ -26,7 +26,7 @@ class CharDataset(Dataset):
     
     def __getitem__(self, idx):
         input_seq = self.input_ids[idx, :]
-        target_seq = self.input_ids[idx, 1:]
+        target_seq = self.input_ids[idx, 1:]  # right-shift target sequence by 1 token ==> no bos token in target sequence
         return input_seq, target_seq
 
 
