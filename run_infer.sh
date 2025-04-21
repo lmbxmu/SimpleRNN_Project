@@ -2,5 +2,5 @@
 # Example inference script
 
 python3 run_infer.py \
-   --prompt "Hello, my name is Ares." \
+   --prompt "Hello, what is 1 plus 1?" \
    --device "cuda"
