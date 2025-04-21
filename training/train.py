@@ -12,9 +12,10 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
+import os
 
 
-def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = False):
+def train_model(model, dataloader, num_epochs, lr, save_path = "./ckpt", save_every_n_epochs = 1, device = "cuda", use_amp = False):
     model.to(device)
     optimizer = optim.Adam(model.parameters(), lr = lr)
     scaler = torch.amp.GradScaler("cuda", enabled = use_amp) # relieve underflow issue from low-precision training
@@ -53,6 +54,15 @@ def train_model(model, dataloader, num_epochs, lr, device = "cuda", use_amp = Fa
             scaler.step(optimizer)
             scaler.update()
             total_loss += loss.item()
+        
+        if (epoch + 1) % save_every_n_epochs == 0:
+            ckpt_path = os.path.join(save_path, f"checkpoint_{epoch + 1}.pt")
+            torch.save({
+                "epoch": epoch + 1,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "scaler_state_dict": scaler.state_dict()
+            }, ckpt_path)
         print(f"Epoch {epoch + 1} Loss: {total_loss / len(dataloader):.4f}")
 
 
